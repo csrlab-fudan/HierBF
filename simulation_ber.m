@@ -9,13 +9,15 @@ alpha = 1/4;
 beta = 1/4;
 
 [W1Golay, W2Golay] = gen_golay_hier(N1, N2, 1/alpha, 1/beta, u, v);
+W1DFT = W1Golay/sqrt(N1*N2*alpha*beta);
+W2DFT = W1Golay/sqrt(N1*N2*alpha*beta);
 
 WBmwss = gen_bmwss_matrix(N1, N2, alpha, beta, u, v);
 WEBmwss = gen_ebmwss_matrix(N1, N2, alpha, beta, u, v);
 
 WGsc = gen_gsc_matrix(N1, N2, alpha, beta, u, v);
 
-W = {{WBmwss}, {WEBmwss},  {WGsc}, {W1Golay, W2Golay}};
+W = {{WBmwss}, {WEBmwss},  {WGsc}, {W1DFT, W2DFT}, {W1Golay, W2Golay}};
 
 
 montNum = 1e5;
@@ -42,14 +44,14 @@ for i = 1:length(SNR)
 end
 
 figure
-marks = {'-^', '-v', '-o', '-*'};
+marks = {'-^', '-v', '-o', '-*', '-s'};
 for i = 1:size(ber, 1)
     semilogy(SNR, ber(i, :), marks{i}, 'LineWidth', 1.5);
     hold on
 end
 set(gca, 'LooseInset', [0,0,0,0]);
 set(gca, 'FontSize', 12)
-legend('BMWSS [13] ', 'EBMWSS [14]', 'Chirp [16]', 'HierBF', fontsize=12)
+legend('BMWSS [12] ', 'EBMWSS [13]', 'Chirp [15]', 'DFT', 'HierBF', fontsize=12)
 xlabel('SNR (dB)', FontSize=12)
 ylabel('BER', FontSize=12)
 

@@ -44,7 +44,7 @@ boundx = [left, left, right, right, left];
 boundy = [down, top, top, down, down];
 
 close all
-titles = {'BMWSS [13] ', 'EBMWSS [14]', 'Chirp [16]', 'HierBF', 'Mask'};
+titles = {'BMWSS [12] ', 'EBMWSS [13]', 'Chirp [15]', 'HierBF', 'Mask'};
 f1 = figure;
 t1 = tiledlayout('flow');
 f2 = figure;
